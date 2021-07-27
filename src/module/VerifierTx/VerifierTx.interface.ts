@@ -1,3 +1,5 @@
+import { HTMLAttributes } from 'react';
+
 export interface IProps {}
 
 export interface IVerifierTxReducer {}
@@ -11,9 +13,20 @@ export interface IVerifierTxLanguage {
         title: string;
         placeholder: string;
     };
-    receiverAddress: {
+    paymentAddress: {
+        title: string;
+        placeholder: string;
+    };
+    otaKey: {
         title: string;
         placeholder: string;
     };
     btnSubmit: string;
+    labelFormVerifiedSentTx: string;
+    labelFormVerifiedReceivedTx: string;
+}
+
+export interface IVerifierForm {
+    handleSubmit: (props: any) => any;
+    handleVerifierTx: (props: any) => any;
 }

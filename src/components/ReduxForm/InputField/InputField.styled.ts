@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { COLORS, ITheme } from 'src/styles';
 
 export const Styled = styled.div`
-    margin-bottom: 15px;
+    margin-top: 30px;
     .input-wrapper {
         position: relative;
         flex: 1;
@@ -18,7 +18,6 @@ export const Styled = styled.div`
         height: 40px;
         display: flex;
         flex: 1;
-        margin-bottom: 30px;
     }
     .sub-title {
         width: 60px;

@@ -72,3 +72,5 @@ declare module '*.module.sass' {
 
 declare module 'wallet-address-validator';
 declare module 'react-detect-offline';
+declare module 'incognito-chain-web-js';
+declare module 'incognito-chain-web-js/build/wallet';

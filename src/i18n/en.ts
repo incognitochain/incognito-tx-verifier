@@ -35,11 +35,17 @@ const language: ILanguage = {
             title: 'Sender seal',
             placeholder: 'Type a sender seal',
         },
-        receiverAddress: {
-            title: 'Receiver address',
-            placeholder: 'Type a receiver address',
+        paymentAddress: {
+            title: 'Payment address',
+            placeholder: 'Type a payment address of receiver',
+        },
+        otaKey: {
+            title: 'OTA Key',
+            placeholder: 'Type an ota key of receiver',
         },
         btnSubmit: 'Verify',
+        labelFormVerifiedSentTx: 'Sent Tx',
+        labelFormVerifiedReceivedTx: 'Receiver Tx',
     },
     setting: {
         headerTitle: 'Settings',

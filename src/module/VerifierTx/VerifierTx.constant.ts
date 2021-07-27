@@ -3,5 +3,6 @@ export const FORM_CONFIGS = {
     formName: 'formVerifierTx',
     fieldTxId: 'txId',
     fieldSenderSeal: 'senderSeal',
-    fieldReceiverAddress: 'receiverAddress',
+    fieldPaymentAddress: 'paymentAddress',
+    fieldOTAKey: 'otaKey',
 };
