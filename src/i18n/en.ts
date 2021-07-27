@@ -26,6 +26,50 @@ const language: ILanguage = {
         privateKey: 'Private key',
         phrase: 'Phrase',
     },
+    verifierTx: {
+        txId: {
+            title: 'TxID',
+            placeholder: 'Type a TxId',
+        },
+        senderSeal: {
+            title: 'Sender seal',
+            placeholder: 'Type a sender seal',
+        },
+        receiverAddress: {
+            title: 'Receiver address',
+            placeholder: 'Type a receiver address',
+        },
+        btnSubmit: 'Verify',
+    },
+    setting: {
+        headerTitle: 'Settings',
+        network: {
+            title: 'Network',
+        },
+        dev: {
+            title: 'Dev Sections',
+            homeConfigs: 'Use staging home configs',
+        },
+        addressBook: {
+            title: 'Address Book',
+            desc: 'Manage your saved addresses',
+        },
+        keychain: {
+            title: 'Keychain',
+            desc: 'Manage your keychains',
+        },
+        decimalDigits: {
+            title: 'Decimal Digits',
+            desc: 'Limit main asset<br />displays to 5 decimal digits',
+        },
+        darkMode: {
+            title: 'Theme',
+            desc: 'Use dark mode and light mode',
+        },
+        logout: {
+            title: 'Logout',
+        },
+    },
 };
 
 export default language;

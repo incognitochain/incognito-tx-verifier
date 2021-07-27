@@ -1,5 +1,5 @@
 import { ENVS, isDev } from 'src/configs';
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import { COLORS } from './colors';
 import { FONT_SIZES } from './fontSize';
 
@@ -112,7 +112,7 @@ export const darkTheme: ITheme = {
     toastBg: COLORS.black3,
 };
 
-export const DEFAULT_THEME = darkTheme;
+export const DEFAULT_THEME = lightTheme;
 
 export const GlobalStyled = createGlobalStyle`
     html {
@@ -131,7 +131,8 @@ export const GlobalStyled = createGlobalStyle`
         font-display: swap;
         box-sizing: border-box;
         font-weight: 400;
-        height:${(props: IGlobalStyle) => props.theme.height};
+        height: 100vh;
+        min-height: 600px;
         border: ${isDev ? 'solid 0.5px' : 'none'};
         overflow: hidden;
         position: relative;
@@ -368,14 +369,5 @@ export const GlobalStyled = createGlobalStyle`
     }
     .modal-data .label {
         margin-bottom: 30px;
-    }
-`;
-
-export const Row = styled.div`
-    display: flex;
-    flex-direction: row;
-    .center {
-        align-items: center;
-        justify-content: center;
     }
 `;

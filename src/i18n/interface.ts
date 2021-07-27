@@ -1,5 +1,10 @@
+import { ISettingLanguage } from 'src/module/Setting';
+import { IVerifierTxLanguage } from 'src/module/VerifierTx';
+
 export interface ILanguage {
     general: IGeneralLanguage;
+    verifierTx: IVerifierTxLanguage;
+    setting: ISettingLanguage;
 }
 
 export interface IGeneralLanguage {
