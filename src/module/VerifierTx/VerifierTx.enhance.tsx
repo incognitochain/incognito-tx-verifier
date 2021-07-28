@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'recompose';
 import { VerifierTx as VerifierTxInstance, gomobileServices } from 'incognito-chain-web-js/build/wallet';
-import { InjectedFormProps, reduxForm, reset, isDirty } from 'redux-form';
+import { InjectedFormProps, reduxForm, reset } from 'redux-form';
 import ErrorBoundary from 'src/components/ErrorBoundary';
 import { ENVS } from 'src/configs';
 import { activeTabSelector } from 'src/components/Core/Tabs/Tabs.selector';

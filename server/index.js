@@ -10,5 +10,5 @@ app.get('/', (req, res) => {
 app.get('/app', (req, res) => res.sendFile(path.resolve(__dirname, '../build/index.html')));
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
+    console.log(`Example app listening at http://192.168.1.255:${port}`);
 });

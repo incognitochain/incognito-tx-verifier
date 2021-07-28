@@ -1,4 +1,4 @@
-import { ENVS, isDev } from 'src/configs';
+import { ENVS } from 'src/configs';
 import { createGlobalStyle } from 'styled-components';
 import { COLORS } from './colors';
 import { FONT_SIZES } from './fontSize';
@@ -130,7 +130,7 @@ export const GlobalStyled = createGlobalStyle`
         font-weight: 400;
         height: 100vh;
         min-height: 600px;
-        border: ${isDev ? 'solid 0.5px' : 'none'};
+        border: none;
         overflow: hidden;
         position: relative;
         font-size: ${FONT_SIZES.regular}px;

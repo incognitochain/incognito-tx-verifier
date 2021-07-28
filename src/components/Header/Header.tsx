@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ArrowLeftIcon, SettingIcon } from 'src/components/Icons';
+import { ArrowLeftIcon } from 'src/components/Icons';
 import { useHistory } from 'react-router-dom';
-
-interface IProps {}
 
 const Styled = styled.div`
     &.header {
@@ -11,7 +9,7 @@ const Styled = styled.div`
     }
 `;
 
-const Header = (props: IProps & any) => {
+const Header = () => {
     const history = useHistory();
     const handleClick = () => {
         history.goBack();
@@ -23,4 +21,4 @@ const Header = (props: IProps & any) => {
     );
 };
 
-export default Header;
+export default React.memo(Header);

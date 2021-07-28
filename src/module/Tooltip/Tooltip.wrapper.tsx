@@ -1,7 +1,6 @@
 import React, { HTMLAttributes } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import debounce from 'lodash/debounce';
 import { actionRemoveTooltip, actionShowTooltip } from './Tooltip.actions';
 
 const Styled = styled.div``;

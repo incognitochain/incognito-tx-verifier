@@ -3,7 +3,6 @@ import ErrorBoundary from 'src/components/ErrorBoundary';
 import { useDispatch, useSelector } from 'react-redux';
 import { translateByFieldSelector } from 'src/module/Setting';
 import Header from 'src/components/Header';
-import { useHistory } from 'react-router-dom';
 import { ISettingLanguage } from './Setting.interface';
 import { actionToggleDarkMode } from './Setting.actions';
 import { ISettingItem } from './features/SettingItem';
@@ -20,7 +19,6 @@ export interface IMergeProps extends IProps, TInner {}
 const enhance = (WrappedComponent: React.FunctionComponent) => (props: any) => {
     const translate: ISettingLanguage = useSelector(translateByFieldSelector)('setting');
     const dispatch = useDispatch();
-    const history = useHistory();
     const { darkMode } = useSelector(settingSelector);
     const server = useSelector(serverSelector);
     let settingFactories: ISettingItem[] = [
@@ -42,7 +40,7 @@ const enhance = (WrappedComponent: React.FunctionComponent) => (props: any) => {
     ];
     return (
         <ErrorBoundary>
-            <Header title={translate.headerTitle} onGoBack={() => history.push('/')} />
+            <Header />
             <WrappedComponent {...{ ...props, settingFactories }} />
         </ErrorBoundary>
     );

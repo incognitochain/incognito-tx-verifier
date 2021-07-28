@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from 'src/components/Header';
-import { ISettingLanguage, translateByFieldSelector, actionSetServer, serverSelector } from 'src/module/Setting';
+import { actionSetServer, serverSelector } from 'src/module/Setting';
 import { IServer, MAINNET_SERVER, TESTNET_SERVER } from 'src/services';
 import styled from 'styled-components';
 
@@ -38,8 +38,6 @@ const NetworkItem = React.memo((props: INetworkItem) => {
 });
 
 const Network = React.memo(() => {
-    const translate: ISettingLanguage = useSelector(translateByFieldSelector)('setting');
-    const networkTranslate = translate.network;
     const defaultServer = useSelector(serverSelector);
     const dispatch = useDispatch();
     const handleChangeNetwork = async (server: IServer) => {
@@ -49,7 +47,7 @@ const Network = React.memo(() => {
     };
     return (
         <Styled>
-            <Header title={networkTranslate.title} />
+            <Header />
             {[MAINNET_SERVER, TESTNET_SERVER].map((server) => (
                 <NetworkItem
                     key={server.id}
