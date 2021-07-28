@@ -5,3 +5,4 @@ export * from './Tooltip.interface';
 export * from './Tooltip.reducer';
 export * from './Tooltip.selector';
 export { default as TooltipContainer } from './TooltipContainer';
+export { default as TooltipWrapper } from './Tooltip.wrapper';

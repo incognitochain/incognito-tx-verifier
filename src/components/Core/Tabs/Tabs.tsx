@@ -1,9 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { themeSelector } from 'src/module/Setting';
-import { COLORS, IGlobalStyle } from 'src/styles';
 import styled from 'styled-components';
+import { actionChangeTab } from './Tabs.actions';
 import { IPropsTabs } from './Tabs.interface';
+import { activeTabSelector } from './Tabs.selector';
 import Tab from './Tabs.tab';
 
 const Styled = styled.div`
@@ -23,24 +24,33 @@ const Styled = styled.div`
 const Tabs = (props: IPropsTabs) => {
     const { children } = props;
     const theme = useSelector(themeSelector);
-    const [activeTab, setActiveTab] = React.useState('');
-    const onClickTabItem = (tab: string) => setActiveTab(tab);
+    const activeTab = useSelector(activeTabSelector);
+    const dispatch = useDispatch();
+    const onClickTabItem = (tab: number | string) => dispatch(actionChangeTab(tab));
     React.useEffect(() => {
         if (children) {
-            setActiveTab(children[0].props.label || '');
+            dispatch(actionChangeTab(children[0].props.tabID));
         }
     }, []);
     return (
         <Styled className="tabs" theme={theme}>
             <ol className="tab-list flex-jcb">
                 {children.map((child) => {
-                    const { label } = child.props;
-                    return <Tab activeTab={activeTab} key={label} label={label} onClickTab={onClickTabItem} />;
+                    const { label, tabID } = child.props;
+                    return (
+                        <Tab
+                            activeTab={activeTab}
+                            key={label}
+                            label={label}
+                            onClickTab={onClickTabItem}
+                            tabID={tabID}
+                        />
+                    );
                 })}
             </ol>
             <div className="tab-content">
                 {children.map((child) => {
-                    if (child.props.label !== activeTab) return undefined;
+                    if (child.props.tabID !== activeTab) return null;
                     return child.props.children;
                 })}
             </div>

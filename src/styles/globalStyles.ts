@@ -124,9 +124,6 @@ export const GlobalStyled = createGlobalStyle`
         color: ${(props: IGlobalStyle) => props.theme.text};
         scrollbar-color: transparent transparent; /*just hides the scrollbar for firefox */
         font-family: 'SF-Pro-Display';
-        min-width:${(props: IGlobalStyle) => props.theme.minWidth};
-        max-width: ${(props: IGlobalStyle) => props.theme.maxWidth};;
-        width: ${(props: IGlobalStyle) => props.theme.width};
         font-style: normal;
         font-display: swap;
         box-sizing: border-box;
@@ -287,7 +284,7 @@ export const GlobalStyled = createGlobalStyle`
         top: 0;
     }
     .icon {
-        margin-left: 5px;
+        margin-left: 15px;
     }
     .scroll-view {
         position: relative;
@@ -369,5 +366,11 @@ export const GlobalStyled = createGlobalStyle`
     }
     .modal-data .label {
         margin-bottom: 30px;
+    }
+    .group-button {
+        > button {
+            flex : 1 0 auto;
+            max-width: 48%;
+        }
     }
 `;

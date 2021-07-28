@@ -1,5 +1,3 @@
-import { HTMLAttributes } from 'react';
-
 export interface IProps {}
 
 export interface IVerifierTxReducer {}
@@ -21,6 +19,7 @@ export interface IVerifierTxLanguage {
         title: string;
         placeholder: string;
     };
+    btnClear: string;
     btnSubmit: string;
     labelFormVerifiedSentTx: string;
     labelFormVerifiedReceivedTx: string;

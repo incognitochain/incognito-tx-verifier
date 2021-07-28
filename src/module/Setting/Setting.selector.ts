@@ -3,6 +3,7 @@ import { IRootState } from 'src/redux/interface';
 import { isDev as isDevelop } from 'src/configs';
 import { translateByLanguage } from 'src/i18n';
 import result from 'lodash/result';
+import { LOCAL_SERVER, MAINNET_SERVER, TESTNET_SERVER } from 'src/services';
 
 export const settingSelector = createSelector(
     (state: IRootState) => state.setting,
@@ -24,3 +25,5 @@ export const translateByFieldSelector = createSelector(languageSelector, (langua
     const ts: any = result(translate, field);
     return ts;
 });
+
+export const serverSelector = createSelector(settingSelector, (preload) => preload.server || {});

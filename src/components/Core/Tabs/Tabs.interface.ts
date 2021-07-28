@@ -5,7 +5,12 @@ export interface IPropsTabs extends HTMLAttributes<HTMLElement> {
 }
 
 export interface IPropsTab {
-    activeTab: string;
+    activeTab: string | number;
     label: string;
-    onClickTab?: (label: string) => any;
+    onClickTab?: (tabID: number | string) => any;
+    tabID: number | string;
+}
+
+export interface ITabsReducer {
+    active: number | string;
 }

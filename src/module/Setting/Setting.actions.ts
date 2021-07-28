@@ -1,3 +1,4 @@
+import { IServer } from 'src/services';
 import {
     ACTION_FETCHED,
     ACTION_TOGGLE_HOME_CONFIGS,
@@ -7,6 +8,7 @@ import {
     ACTION_TOGGLE_MODE_SAVE_RAW_BURN_TX,
     ACTION_TOGGLE_DARK_MODE,
     ACTION_CHANGE_LANGUAGE,
+    ACTION_SET_SERVER,
 } from './Setting.constant';
 
 export const actionFetched = (payload: any) => ({
@@ -42,4 +44,9 @@ export const actionToggleDarkMode = (payload: boolean) => ({
 export const actionChangeLanguage = (language: string) => ({
     type: ACTION_CHANGE_LANGUAGE,
     payload: language,
+});
+
+export const actionSetServer = (payload: IServer) => ({
+    type: ACTION_SET_SERVER,
+    payload,
 });

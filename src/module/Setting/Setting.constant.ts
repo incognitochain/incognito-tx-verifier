@@ -5,4 +5,5 @@ export const ACTION_TOGGLE_DEV_MODE = '[setting] Toggle dev mode';
 export const ACTION_TOGGLE_MODE_SAVE_BURN_TX = '[setting] Toggle mode save burn tx';
 export const ACTION_TOGGLE_MODE_SAVE_RAW_BURN_TX = '[setting] Toggle mode save raw burn tx';
 export const ACTION_TOGGLE_DARK_MODE = '[setting] Toggle dark mode ui';
-export const ACTION_CHANGE_LANGUAGE = `[configs] Change language`;
+export const ACTION_CHANGE_LANGUAGE = `[setting] Change language`;
+export const ACTION_SET_SERVER = `[setting] Set server`;

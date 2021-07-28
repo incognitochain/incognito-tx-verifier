@@ -4,8 +4,8 @@ import styled from 'styled-components';
 interface IProps {}
 
 const Styled = styled.button`
-    min-width: 13px;
-    height: 15px;
+    min-width: 20px;
+    height: 20px;
 `;
 
 const TrashVector = React.memo((props: any) => {

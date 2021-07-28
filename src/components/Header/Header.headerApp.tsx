@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { AppIcon, SettingIcon } from 'src/components/Icons';
 
-interface IProps {}
+interface IProps {
+    customLeftHeader?: any;
+}
 
 const Styled = styled.div`
     &.header {
@@ -11,10 +13,16 @@ const Styled = styled.div`
 `;
 
 const Header = (props: IProps & any) => {
+    const { customLeftHeader } = props;
     return (
         <Styled className="header flex-jcb">
-            <SettingIcon />
-            <AppIcon />
+            <div className="header-left flex">
+                <SettingIcon />
+                {customLeftHeader && customLeftHeader}
+            </div>
+            <div className="header-right">
+                <AppIcon />
+            </div>
         </Styled>
     );
 };

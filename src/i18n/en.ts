@@ -25,6 +25,8 @@ const language: ILanguage = {
         masterKeyName: 'Master key name',
         privateKey: 'Private key',
         phrase: 'Phrase',
+        btnSetting: 'Setting',
+        btnTrash: 'Clear',
     },
     verifierTx: {
         txId: {
@@ -44,6 +46,7 @@ const language: ILanguage = {
             placeholder: 'Type an ota key of receiver',
         },
         btnSubmit: 'Verify',
+        btnClear: 'Clear',
         labelFormVerifiedSentTx: 'Sent Tx',
         labelFormVerifiedReceivedTx: 'Receiver Tx',
     },

@@ -1,14 +1,11 @@
 import React, { HTMLAttributes } from 'react';
-import styled from 'styled-components';
-import { Button } from '../Button';
+import { Button } from 'src/components/Core';
 import { IPropsTab } from './Tabs.interface';
 
-const Styled = styled.div``;
-
 const Tab = (props: IPropsTab & HTMLAttributes<HTMLDivElement>) => {
-    const { activeTab, label, onClickTab } = props;
-    const onClick = () => typeof onClickTab === 'function' && onClickTab(label);
-    return <Button title={label} onClick={onClick} className="tab" disabled={label !== activeTab} />;
+    const { activeTab, label, onClickTab, tabID } = props;
+    const onClick = () => typeof onClickTab === 'function' && onClickTab(tabID);
+    return <Button title={label} onClick={onClick} className="tab" disabled={tabID !== activeTab} />;
 };
 
 export default React.memo(Tab);

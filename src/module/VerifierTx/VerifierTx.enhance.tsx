@@ -1,38 +1,82 @@
 import React from 'react';
 import { compose } from 'recompose';
-import {
-    VerifierTx as VerifierTxInstance,
-    VERIFIER_TX_STATUS,
-    gomobileServices,
-} from 'incognito-chain-web-js/build/wallet';
-import { InjectedFormProps, reduxForm } from 'redux-form';
+import { VerifierTx as VerifierTxInstance, gomobileServices } from 'incognito-chain-web-js/build/wallet';
+import { InjectedFormProps, reduxForm, reset, isDirty } from 'redux-form';
 import ErrorBoundary from 'src/components/ErrorBoundary';
-import { useFormValue } from 'src/hooks';
 import { ENVS } from 'src/configs';
+import { activeTabSelector } from 'src/components/Core/Tabs/Tabs.selector';
+import { useDispatch, useSelector } from 'react-redux';
+import { LoadingIcon } from 'src/components/Icons';
 import { FORM_CONFIGS } from './VerifierTx.constant';
+import { serverSelector } from '../Setting';
 
 interface IProps {}
 
 interface TInner {
     handleVerifierTx: () => any;
+    handleClearForm: () => any;
+    result: string;
 }
 
 export interface IMergeProps extends IProps, TInner, InjectedFormProps {}
 
-const enhance = (WrappedComponent: React.FunctionComponent) => (props: IProps & any) => {
-    const [txId] = useFormValue({ formName: FORM_CONFIGS.formName, field: FORM_CONFIGS.fieldTxId });
-    const [senderSeal] = useFormValue({ formName: FORM_CONFIGS.formName, field: FORM_CONFIGS.fieldSenderSeal });
-    const [paymentAddress] = useFormValue({
-        formName: FORM_CONFIGS.formName,
-        field: FORM_CONFIGS.fieldPaymentAddress,
-    });
+const formatResult = ({
+    coinPosition,
+    nConfirms,
+    requiredConfirmations = 5,
+}: {
+    coinPosition: number;
+    nConfirms: number;
+    requiredConfirmations?: number;
+}) => {
+    return coinPosition < 0
+        ? 'FAILED: TX does not include such transfer'
+        : nConfirms <= 0
+        ? 'MISSING: TX is not yet known by network'
+        : nConfirms < requiredConfirmations
+        ? `PENDING: transfer is included at UTXO #${coinPosition}\nConfirmations: ${nConfirms}`
+        : `ACCEPTED: transfer is included at UTXO #${coinPosition}\nConfirmations: ${nConfirms}`;
+};
 
-    const handleVerifierTx = (data: any) => {
+const enhance = (WrappedComponent: React.FunctionComponent) => (props: IProps & any) => {
+    const activeTab = useSelector(activeTabSelector);
+    const [loadedWasm, setLoadedWasm] = React.useState(false);
+    const server = useSelector(serverSelector);
+    const [result, setResult] = React.useState('');
+    const dispatch = useDispatch();
+    const handleVerifierTx = async (data: any) => {
+        let initData = {
+            coinPosition: 0,
+            nConfirms: 0,
+        };
         try {
-            console.log(txId, senderSeal, paymentAddress);
-            console.log('data', data);
+            await setResult('');
+            let verifierTxInst = new VerifierTxInstance();
+            verifierTxInst.setRPCClient(server.chainURL);
+            switch (activeTab) {
+                case 0: {
+                    const { txId, senderSeal, paymentAddress } = data;
+                    initData = await verifierTxInst.verifySentTx({
+                        txId,
+                        senderSeal,
+                        paymentAddress,
+                    });
+                    break;
+                }
+                case 1: {
+                    const { txId, otaKey } = data;
+                    initData = await verifierTxInst.verifyReceivedTx({
+                        txId,
+                        otaKey,
+                    });
+                    break;
+                }
+                default:
+                    break;
+            }
+            setResult(formatResult(initData));
         } catch (error) {
-            console.log(error);
+            setResult(error?.message || JSON.stringify(error));
         }
     };
 
@@ -40,54 +84,26 @@ const enhance = (WrappedComponent: React.FunctionComponent) => (props: IProps & 
         try {
             if (typeof gomobileServices.loadWasm === 'function') {
                 console.log('LOAD WASM URL', `${ENVS.REACT_APP_DOMAIN_URL}/privacy.wasm`);
-                const result = await gomobileServices.loadWasm(`${ENVS.REACT_APP_DOMAIN_URL}/privacy.wasm`);
-                console.log('result', result);
-                let verifierTxInst = new VerifierTxInstance();
-                console.log('VerifierTxInstance', verifierTxInst);
-                verifierTxInst.setRPCClient('https://testnet.incognito.org/fullnode');
-                const txId = 'e77043447f1993ecc92ff2be219b87ccc90e84454dc70fe914d949485450fea2';
-                const senderSeal = 'd99071adad109362780b6d4b025dceeb7e84d065112b3302c57dbce1d3706a0200000001';
-                const paymentAddress =
-                    '12snj4DSGwAHfeTh5mxpfqgjRRogVtuej3A9rVBHvXWxwM8Zb4GFgEuhbxrxJBHvnzB4KPsnsVP7s3cQAr77usYFdGeMEJ17bTCCrnMLzGZAX8uLK2ejK1naJinAtetqGJkHujFN1HuFJGUzeoEr';
-                const otaKey =
-                    '14yCTpkbAxREZ7GPVBe7hF3U71F9vjVBrEf8fjTbx7efRWfsYQd7bEzHuAjqu1JBUgyCfpYWdDzdi2iocw3sK7Ekvfua4wNuQJW3npC';
-                console.log('verifierTxInst.verifySentTx', verifierTxInst.verifySentTx);
-                console.log('verifierTxInst.verifyReceivedTx', verifierTxInst.verifyReceivedTx);
-                if (typeof verifierTxInst.verifySentTx === 'function') {
-                    console.log('AAAA');
-                    try {
-                        const reVerifierSentTx = await verifierTxInst.verifySentTx({
-                            txId,
-                            senderSeal,
-                            paymentAddress,
-                        });
-                        console.log('BBB');
-                        console.log('reVerifierSentTx', reVerifierSentTx);
-                    } catch (error) {
-                        console.log('error', error);
-                    }
-                }
-
-                if (typeof verifierTxInst.verifyReceivedTx === 'function') {
-                    const reVerifierReceiverTx = await verifierTxInst.verifyReceivedTx({
-                        txId,
-                        otaKey,
-                    });
-                    console.log('reVerifierReceiverTx', reVerifierReceiverTx);
-                }
+                await gomobileServices.loadWasm(`${ENVS.REACT_APP_DOMAIN_URL}/privacy.wasm`);
+                setLoadedWasm(true);
             }
         } catch (error) {
             console.log('CAN NOT IMPLEMENT GO METHODS BY WASM', error);
         }
     };
-
+    const handleClearForm = () => {
+        dispatch(reset(FORM_CONFIGS.formName));
+        setResult('');
+    };
     React.useEffect(() => {
         handleLoadWasm();
     }, []);
-
+    if (!loadedWasm) {
+        return <LoadingIcon center />;
+    }
     return (
         <ErrorBoundary>
-            <WrappedComponent {...{ ...props, handleVerifierTx }} />
+            <WrappedComponent {...{ ...props, handleVerifierTx, handleClearForm, result }} />
         </ErrorBoundary>
     );
 };

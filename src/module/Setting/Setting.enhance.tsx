@@ -7,7 +7,8 @@ import { useHistory } from 'react-router-dom';
 import { ISettingLanguage } from './Setting.interface';
 import { actionToggleDarkMode } from './Setting.actions';
 import { ISettingItem } from './features/SettingItem';
-import { settingSelector } from './Setting.selector';
+import { serverSelector, settingSelector } from './Setting.selector';
+import { route as networkRoute } from './features/Network/Network.route';
 
 interface IProps {}
 interface TInner {
@@ -21,7 +22,12 @@ const enhance = (WrappedComponent: React.FunctionComponent) => (props: any) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const { darkMode } = useSelector(settingSelector);
+    const server = useSelector(serverSelector);
     let settingFactories: ISettingItem[] = [
+        {
+            title: translate.network.title,
+            child: [{ desc: server.chainURL, link: networkRoute }],
+        },
         {
             title: translate.darkMode.title,
             child: [

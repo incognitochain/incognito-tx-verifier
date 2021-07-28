@@ -30,4 +30,6 @@ export interface IGeneralLanguage {
     masterKeyName: string;
     privateKey: string;
     phrase: string;
+    btnSetting: string;
+    btnTrash: string;
 }
